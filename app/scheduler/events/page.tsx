@@ -22,7 +22,7 @@ const page = async () => {
             <EventTypeForm />
         </div>
         <div className='mx-auto'> 
-            <EventCardGroup events={events}  />
+            <EventCardGroup events={events} type='private'  />
         </div>
     </div>
   )

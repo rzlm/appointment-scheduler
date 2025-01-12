@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import { fetchPublicEventsByUserId } from '../Utils/fetching';
 import EventCardGroup from '@/components/EventCardGroup';
 import { Event } from '@/app/Utils/types';
@@ -11,7 +10,7 @@ const events = await fetchPublicEventsByUserId() as Event[]
       <h1 className='text-2xl'>Available appointments</h1>
       {/* Fetch and display public events for this user */}
       <div className=' max-w-screen-lg  '>
-      <EventCardGroup events={events} /> 
+      <EventCardGroup events={events} type={"public"} /> 
 
       </div>
     </div>
