@@ -1,32 +1,13 @@
 'use server'
 import { createClient } from '@supabase/supabase-js'
-
+import { getUserId } from '../actions'
 
  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 const supabase = createClient(supabaseUrl || "", supabaseKey|| "")
 
 //get
-export const getUserId = async () => {
-    const {
-      data: { session },
-      error,
-    } = await supabase.auth.getSession();
-  
-    if (error) {
-      console.error('Error fetching session:', error);
-      return null;
-    }
-  
-    if (session && session.user) {
-      console.log('User ID:', session.user.id);
-      return session.user.id;
-    } else {
-      console.warn('No user session found');
-      return null;
-    }
-  };
-  
+
 export const fetchEvents = async () => {
     const { data: events, error } = await supabase
         .from('events')
@@ -116,4 +97,30 @@ export const updateEventStatus = async (id: number, status: boolean) => {
     }
 
     return data;
+}
+
+export const getEventsByUserId = async () => { 
+    const userId = await getUserId()
+    const { data: events, error } = await supabase
+        .from('events')
+        .select('*')
+        .eq('userId', userId)
+    
+    if (error) {
+        throw new Error(error.message)
+    }
+    return events
+}
+
+//fetch public events
+export const fetchPublicEventsByUserId = async () => {
+    const { data: events, error } = await supabase
+        .from('events')
+        .select('*')
+        .eq('status', true)
+    
+    if (error) {
+        throw new Error(error.message)
+    }
+    return events
 }

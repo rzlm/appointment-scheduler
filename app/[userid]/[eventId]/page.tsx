@@ -1,13 +1,13 @@
-import { useRouter } from 'next/router';
+'use client'
+import { useParams } from 'next/navigation';
 
-export default function EventBookingPage() {
-  // const { userId, eventId } = useRouter().query;
+export default function Page() {
+  const { eventId } = useParams();
 
   return (
     <div>
-      <h1>Booking for Event {}</h1>
-      <p>Hosted by {}</p>
-      {/* Display booking form */}
+      <h1>Post Details</h1>
+      <p>Post ID: </p>
     </div>
   );
 }

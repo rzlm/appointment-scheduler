@@ -2,6 +2,7 @@ import React from 'react'
 import EventCardGroup from '@/components/EventCardGroup'
 import {EventTypeForm} from '@/components/EventTypeDialog'
 import { fetchEvents } from '@/app/Utils/fetching'
+import { getEventsByUserId } from '@/app/Utils/fetching'
 import { Event } from '@/app/Utils/types'
 const page = async () => {
 
@@ -10,7 +11,7 @@ const page = async () => {
   
   //  const events = fetchEvents()
     //as type event
-     const events = await fetchEvents() as Event[]
+     const events = await getEventsByUserId() as Event[]
      console.log(events)
   return (
     <div className=''>
