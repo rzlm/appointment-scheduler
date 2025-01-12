@@ -5,6 +5,7 @@ interface EventType {
 
 interface Event {
     id: number;
+    userId:string;
     title: string;
     description: string;
     location: string;
@@ -16,10 +17,13 @@ interface Event {
 }
 
 interface Booking {
-    event: Event;
+    id: number;
+    title:string;
+    event_id: number;
     participant: string;
     datetime: string;
-    status: "pending" | "accepted" | "cancelled";
+    email: string;
+    status: "Pending" | "Accepted" | "Cancelled";
 }
 
 interface User {

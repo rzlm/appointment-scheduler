@@ -4,6 +4,10 @@ import {EventTypeForm} from '@/components/EventTypeDialog'
 import { fetchEvents } from '@/app/Utils/fetching'
 import { Event } from '@/app/Utils/types'
 const page = async () => {
+
+  
+
+  
   //  const events = fetchEvents()
     //as type event
      const events = await fetchEvents() as Event[]

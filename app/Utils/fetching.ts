@@ -7,6 +7,26 @@ const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 const supabase = createClient(supabaseUrl || "", supabaseKey|| "")
 
 //get
+export const getUserId = async () => {
+    const {
+      data: { session },
+      error,
+    } = await supabase.auth.getSession();
+  
+    if (error) {
+      console.error('Error fetching session:', error);
+      return null;
+    }
+  
+    if (session && session.user) {
+      console.log('User ID:', session.user.id);
+      return session.user.id;
+    } else {
+      console.warn('No user session found');
+      return null;
+    }
+  };
+  
 export const fetchEvents = async () => {
     const { data: events, error } = await supabase
         .from('events')
@@ -44,7 +64,11 @@ export const createEvent = async (event: FormValues) => {
         default:
             location = "In person"
     }
-    const { data, error } = await supabase
+    const userId = await getUserId()
+    if(!userId) {
+        throw new Error("User not found")
+    } else {
+        const { data, error } = await supabase
         .from('events')
         .insert({
             title: event.event_title,
@@ -54,13 +78,16 @@ export const createEvent = async (event: FormValues) => {
             event_type: event.event_type,
             startdate: event.event_start_date,
             duration: event.event_duration,
-            enddate: event.event_end_date
+            enddate: event.event_end_date,
+            userId: userId
         })
     
     if (error) {
         throw new Error(error.message)
     }
     return data
+    }
+   
 }
 
 //delete
