@@ -124,3 +124,17 @@ export const fetchPublicEventsByUserId = async () => {
     }
     return events
 }
+
+//fetch event by id
+export const getPublicEventById = async (id: number) => {
+    const { data: events, error } = await supabase
+        .from('events')
+        .select('*')
+        .eq('id', id)
+        .eq('status', true)
+    
+    if (error) {
+        throw new Error(error.message)
+    }
+    return events
+}

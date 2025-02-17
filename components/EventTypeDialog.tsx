@@ -2,6 +2,7 @@
 "use client"
 import { Button } from "@/components/ui/button"
 import { useForm } from "react-hook-form"
+import {Plus} from 'lucide-react'
 import EventForm
  from "./EventForm"
 import {
@@ -30,7 +31,10 @@ export function EventTypeForm() {
   return (
     <Dialog >
       <DialogTrigger asChild>
-        <Button variant="outline">Add Event Type</Button>
+        <Button variant="default" className="shadow-lg ">
+          <Plus className="h-6 w-6" />
+          Add Event Type
+        </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px] md:min-w-[500px] max-h-screen overflow-scroll ">
         <DialogHeader>

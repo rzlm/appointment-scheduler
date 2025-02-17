@@ -14,12 +14,15 @@ const page = async () => {
      const events = await getEventsByUserId() as Event[]
      console.log(events)
   return (
-    <div className=''>
-        <div className='m-8'>
-            <h1>Create an Event Type</h1>
+    <div className='m-8'>
+        <div className='flex md:flex-row flex-col justify-between gap-4 md:items-center'>
+        <div className='flex flex-col gap-2'>
+            <h1 className='text-2xl font-bold'>Create an Event Type</h1>
+            <p className='text-gray-500'>Create different event types here and share on your page, allowing people to start booking appointments.</p>
         </div>
-        <div className='m-8'>
+        <div className=''>
             <EventTypeForm />
+        </div>
         </div>
         <div className='mx-auto'> 
             <EventCardGroup events={events} type='private'  />

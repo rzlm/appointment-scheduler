@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import { Button } from "@/components/ui/button"
-import { Calendar, Clock, Pencil, CheckCheck, Trash } from 'lucide-react'
+import { Calendar, Clock, Pencil, CheckCheck, Trash, MapPin } from 'lucide-react'
 import { Event } from '@/app/Utils/types'
 import { FormatDateOptions } from 'date-fns'
 import { formatDate } from 'date-fns'
@@ -57,8 +57,8 @@ export const EventTypeCard: React.FC<EventTypeCardProps> = ({ event }) => {
         <div className=" w-full text-left">
           <div className="flex ">
           <div className="flex flex-col ">
-            <div className="flex flex-col  space-x-2  ">
-            <h2 className="text-xl font-normal">{event.title}</h2>
+            <div className="flex flex-col   ">
+            <h2 className="text-xl font-semibold ">{event.title}</h2>
             <p className='text-gray-500'>Shareable Link:  </p>
             <Link href={`/scheduler/events/${event.id}`}>link</Link>
             </div>
@@ -71,33 +71,37 @@ export const EventTypeCard: React.FC<EventTypeCardProps> = ({ event }) => {
                 <p className="text-sm">{formmattedStartDate}</p>
               </div>
               <div className="flex items-center gap-2">
-                <Clock className="h-4 w-4 " />
+                {/* <Clock className="h-4 w-4 " /> */}
                 <p className="text-sm">{formmattedStartTime} - </p>
               </div>
             </div>
             <div className="flex flex-row gap-2">
               <div className="flex items-center gap-2">
-                <Calendar className="h-4 w-4 " />
+                {/* <Calendar className="h-4 w-4 " /> */}
                 <p className="text-sm">{formmmatedEndDate}</p>
               </div>
               <div className="flex items-center gap-2">
-                <Clock className="h-4 w-4 " />
+                {/* <Clock className="h-4 w-4 " /> */}
                 <p className="text-sm">{formmattedEndTime} </p>
               </div>
             </div>
             </div>
             <div className='my-2'>
-            <p className="text-sm">{event.description}</p>
+            <p className="text-sm text-gray-700" >{event.description}</p>
             </div>
             <div className="flex gap-2  flex-row md:flex-col my-2 ">
               
               <div className="flex items-center gap-2">
-              <p className="text-sm bg-red-500 p-1 rounded-lg text-white text-nowrap md:w-fit ">{String(event.location)}</p>
-                <p className="text-sm bg-red-500 p-1 rounded-lg text-white">{String(event.event_type)}</p>
+                <div className='flex flex-row gap-2 rounded-lg bg-gray-100 p-2'>
+                  <MapPin className="" size={18} color='#374151'/>
+                  <p className="text-sm   text-gray-700 text-nowrap md:w-fit font-semi ">{String(event.location)}</p>
+
+                </div>
+                <p className="text-sm bg-gray-100 text-gray-700  outline-slate-500 p-2 rounded-lg ">{String(event.event_type)}</p>
               </div>
               <div className='flex flex-row justify-between w-full'>
                 
-              <div className="flex items-center gap-2 p-1 bg-blue-100 w-fit rounded-lg">
+              <div className="flex items-center gap-2 p-2 bg-gray-300 text-gray-700  w-fit rounded-lg">
                 <Clock className="h-4 w-4 " />
                 <p className="text-sm">{duration}</p>
               </div>
@@ -112,8 +116,8 @@ export const EventTypeCard: React.FC<EventTypeCardProps> = ({ event }) => {
            
          
         </div>
-        <div className='w-full text-right'>
-            <Button variant="outline" size="sm" className="text-sm mx-1 bg-red-200 " onClick={handleDelete} >
+        <div className='w-full text-right flex flex-row justify-end gap-4 '>
+            <Button variant="default" size="sm" className=" bg-red-200 text-red-800 hover:text-red-100 hover:bg-red-700 px-" onClick={handleDelete} >
                 <Trash className="h-4 w-4 " />
                     Delete
                 </Button>
@@ -121,7 +125,7 @@ export const EventTypeCard: React.FC<EventTypeCardProps> = ({ event }) => {
                 <Pencil className="h-4 w-4 " />
                   Edit
                 </Button> */}
-                <Button variant="outline" size="sm" className="text-sm mx-1 bg-blue-200"  onClick={handleStatus} >
+                <Button variant="default" size="sm" className=" text-blue-100 bg-blue-700 hover:bg-blue-100 hover:text-blue-900 "  onClick={handleStatus} >
                 <CheckCheck className="h-4 w-4 " />
                 {event.status === true ? "Event is Active" : "Event is Inactive"}
                 </Button>

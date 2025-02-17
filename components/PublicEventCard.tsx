@@ -1,17 +1,16 @@
 'use client'
 import React from 'react'
 import { Button } from "@/components/ui/button"
-import { Calendar, Clock, Pencil, CheckCheck, Trash } from 'lucide-react'
+import { Calendar, Clock, Pencil, CheckCheck, Trash, ChevronsRight } from 'lucide-react'
 import { Event } from '@/app/Utils/types'
 import { FormatDateOptions } from 'date-fns'
 import { formatDate } from 'date-fns'
 import { useToast } from "@/hooks/use-toast"
 import { format } from 'date-fns';
-
+import Link from 'next/link'
 
 import { formatDuration } from '@/app/Utils/format'
 import { deleteEvent, updateEventStatus } from '@/app/Utils/fetching'
-import Link from 'next/link'
 interface PublicEventCardProps {
   event: Event;
 }
@@ -93,13 +92,14 @@ export const PublicEventCard: React.FC<PublicEventCardProps> = ({ event }) => {
             </div>
           </div>
           </div>
-           
-         
         </div>
         <div className='w-full text-right'>
-           
-             
-                <Button variant="outline" size="sm" className="text-sm mx-1 bg-blue-200">Link </Button>  
+          <Link href={eventLink}>
+              <Button variant="outline" size="sm" className=" p-4 text-sm mx-1 bg-gradient-to-r from-red-600 text-white via-red-500  to-red-400 to-90% rounded-lg">
+                   Link
+                  <ChevronsRight className="h-4 w-4" />
+                   </Button>  
+          </Link>
                 
               
               

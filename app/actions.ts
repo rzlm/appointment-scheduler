@@ -143,3 +143,18 @@ export const getUserId = async () => {
     return user.id;
   }
 }
+
+export const getPublicEventById = async (id: number) => {
+  const supabase = await createClient();
+
+    const { data: events, error } = await supabase
+        .from('events')
+        .select('*')
+        .eq('id', id)
+        .eq('status', true)
+    
+    if (error) {
+        throw new Error(error.message)
+    }
+    return events
+}
